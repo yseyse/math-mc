@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Life in the UK Test Practice</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .selected { background-color: #e0e7ff; border-color: #6366f1; }
+        .correct { background-color: #d1fae5 !important; border-color: #10b981 !important; }
+        .incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div id="app">
+
+
+
+<div class="hidden">
+  <button id="practiceBtn"></button>
+  <button id="testBtn"></button>
+  <button id="bookmarksBtn"></button>
+</div>
+
+
+
+  <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen" class="fade-in">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-8">
+                    <div class="flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Welcome to Life in the UK Test Practice</h2>
+                    <p class="text-gray-600 text-center mb-8">Prepare for your citizenship test with our comprehensive question bank and mock tests.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-indigo-50 p-6 rounded-lg text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-indigo-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Practice Mode</h3>
+                            <p class="text-gray-600">Study at your own pace with immediate feedback and explanations.</p>
+                        </div>
+                        <div class="bg-indigo-50 p-6 rounded-lg text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-indigo-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                            </svg>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Mock Test</h3>
+                            <p class="text-gray-600">Simulate the real test with 24 random questions in 45 minutes.</p>
+                        </div>
+                        <div class="bg-indigo-50 p-6 rounded-lg text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-indigo-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                            </svg>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Bookmarks</h3>
+                            <p class="text-gray-600">Save difficult questions to review them later.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button id="startPracticeBtn" class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition">Start Practice</button>
+                        <button id="startTestBtn" class="px-6 py-3 bg-indigo-100 text-indigo-600 rounded-lg font-medium hover:bg-indigo-200 transition">Take Mock Test</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Mode -->
+        <div id="practiceMode" class="hidden fade-in">
+            <div class="mb-6 flex flex-col md:flex-row justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 md:mb-0">Practice Mode</h2>
+                <div class="flex space-x-4">
+                    <button id="prevQuestionBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+                    <button id="nextQuestionBtn" class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition">Next</button>
+                </div>
+            </div>
+
+            <div id="questionContainer" class="question-card bg-white rounded-xl shadow-md overflow-hidden p-6 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <span id="questionNumber" class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Question 1/24</span>
+                    <button id="bookmarkBtn" class="text-gray-400 hover:text-yellow-500 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                        </svg>
+                    </button>
+                </div>
+                <h3 id="questionText" class="text-xl font-semibold text-gray-800 mb-6">Loading question...</h3>
+                <div id="optionsContainer" class="space-y-3">
+                    <!-- Options will be inserted here -->
+                </div>
+                <div id="explanationContainer" class="mt-6 p-4 bg-blue-50 rounded-lg hidden">
+                    <h4 class="font-semibold text-gray-800 mb-2">Explanation:</h4>
+                    <p id="explanationText" class="text-gray-700"></p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Your Progress</h3>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                    <div id="progressBar" class="bg-indigo-600 h-2.5 rounded-full progress-bar" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-sm text-gray-600">
+                    <span>Answered: <span id="answeredCount">0</span>/<span id="totalQuestions">0</span></span>
+                    <span>Correct: <span id="correctCount">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mock Test Mode -->
+        <div id="testMode" class="hidden fade-in">
+            <div class="mb-6 flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Mock Test</h2>
+                    <p class="text-gray-600">Answer 24 questions in 45 minutes. Pass mark: 18 correct (75%)</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center">
+                    <div id="timer" class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-lg text-lg font-semibold">45:00</div>
+                    <button id="submitTestBtn" class="ml-4 px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition">Submit Test</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Test questions will be inserted here -->
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Test Progress</h3>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                    <div id="testProgressBar" class="bg-indigo-600 h-2.5 rounded-full progress-bar" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-sm text-gray-600">
+                    <span>Answered: <span id="testAnsweredCount">0</span>/24</span>
+                    <span id="testTimeRemaining">Time remaining: 45:00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Results -->
+        <div id="testResults" class="hidden fade-in">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-8">
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Test Results</h2>
+                    
+                    <div id="resultsSummary" class="text-center mb-8">
+                        <div id="passFailBadge" class="inline-block px-4 py-2 rounded-full text-white font-semibold mb-4"></div>
+                        <div class="text-5xl font-bold mb-2"><span id="scorePercentage">0</span>%</div>
+                        <div class="text-xl text-gray-600">You answered <span id="correctAnswers">0</span> out of 24 questions correctly</div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Score Breakdown</h3>
+                        <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                            <div id="resultsProgressBar" class="bg-indigo-600 h-4 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-600">
+                            <span>0%</span>
+                            <span class="font-medium">Pass mark: 75%</span>
+                            <span>100%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button id="reviewTestBtn" class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition">Review Answers</button>
+                        <button id="newTestBtn" class="px-6 py-3 bg-indigo-100 text-indigo-600 rounded-lg font-medium hover:bg-indigo-200 transition">Take New Test</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bookmarks -->
+        <div id="bookmarksScreen" class="hidden fade-in">
+            <div class="mb-6 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Bookmarked Questions</h2>
+                <button id="clearBookmarksBtn" class="px-4 py-2 bg-red-100 text-red-600 rounded-lg font-medium hover:bg-red-200 transition">Clear All</button>
+            </div>
+
+            <div id="bookmarksContainer" class="space-y-4">
+                <!-- Bookmarked questions will be inserted here -->
+                <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                    <p class="text-gray-600">You haven't bookmarked any questions yet.</p>
+                    <button id="startBookmarkPracticeBtn" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition">Start Practice</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">Life in the UK Test Practice</h3>
+                    <p class="text-gray-400">Prepare for your citizenship test with confidence</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition">About</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Contact</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
+                <p>© 2023 Life in the UK Test Practice. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Data
+        const questions = [
+            {
+                question: "Which of these is a British overseas territory?",
+                options: ["Malta", "Cyprus", "Gibraltar", "Republic of Ireland"],
+                correctAnswer: 2,
+                explanation: "Gibraltar is a British overseas territory located at the southern tip of the Iberian Peninsula."
+            },
+            {
+                question: "What is the name of the ceremony to become a British citizen?",
+                options: ["Citizenship Test", "Naturalization Ceremony", "Oath Ceremony", "Citizenship Ceremony"],
+                correctAnswer: 3,
+                explanation: "The final stage in becoming a British citizen is attending a citizenship ceremony where you make an oath of allegiance."
+            },
+            {
+                question: "Which of these is NOT one of the four patron saints of the UK?",
+                options: ["St George", "St David", "St Patrick", "St Paul"],
+                correctAnswer: 3,
+                explanation: "The four patron saints are St George (England), St Andrew (Scotland), St David (Wales), and St Patrick (Northern Ireland). St Paul is not a patron saint of any UK nation."
+            },
+            {
+                question: "When is St David's Day?",
+                options: ["1st March", "17th March", "23rd April", "30th November"],
+                correctAnswer: 0,
+                explanation: "St David's Day is celebrated on 1st March in Wales."
+            },
+            {
+                question: "What is the Church of England sometimes called?",
+                options: ["Catholic Church", "Anglican Church", "Protestant Church", "Methodist Church"],
+                correctAnswer: 1,
+                explanation: "The Church of England is also known as the Anglican Church."
+            },
+            {
+                question: "Who is the heir to the throne of the United Kingdom?",
+                options: ["Prince Harry", "Prince William", "Prince Charles", "Princess Anne"],
+                correctAnswer: 1,
+                explanation: "Prince William, the Prince of Wales, is the heir to the throne following the accession of King Charles III."
+            },
+            {
+                question: "What is the capital of Scotland?",
+                options: ["Glasgow", "Aberdeen", "Edinburgh", "Dundee"],
+                correctAnswer: 2,
+                explanation: "Edinburgh is the capital city of Scotland."
+            },
+            {
+                question: "What flower is traditionally worn by people on Remembrance Day?",
+                options: ["Daffodil", "Poppy", "Rose", "Thistle"],
+                correctAnswer: 1,
+                explanation: "The red poppy is worn on Remembrance Day to commemorate those who died in the First World War and later conflicts."
+            },
+            {
+                question: "What is the minimum age to vote in UK general elections?",
+                options: ["16", "17", "18", "21"],
+                correctAnswer: 2,
+                explanation: "The minimum voting age for UK general elections is 18 years old."
+            },
+            {
+                question: "Which of these is NOT a devolved administration in the UK?",
+                options: ["Scottish Parliament", "Northern Ireland Assembly", "Welsh Parliament", "Yorkshire Assembly"],
+                correctAnswer: 3,
+                explanation: "The UK has three devolved administrations: the Scottish Parliament, the Northern Ireland Assembly, and the Welsh Parliament (Senedd Cymru). There is no Yorkshire Assembly."
+            },
+            {
+                question: "Who was the first Briton to win the Olympic gold medal in the 10,000 meters?",
+                options: ["Sebastian Coe", "Mo Farah", "Steve Ovett", "Linford Christie"],
+                correctAnswer: 1,
+                explanation: "Mo Farah was the first Briton to win an Olympic gold medal in the 10,000 meters at the 2012 London Olympics."
+            },
+            {
+                question: "What is the name of the clock tower at the Houses of Parliament?",
+                options: ["Big Ben", "Elizabeth Tower", "Victoria Tower", "Westminster Tower"],
+                correctAnswer: 1,
+                explanation: "The clock tower is officially called the Elizabeth Tower. Big Ben is actually the name of the main bell inside the tower."
+            },
+            {
+                question: "Which of these is a famous tennis tournament held in the UK?",
+                options: ["The Open Championship", "The Grand National", "Wimbledon", "The FA Cup"],
+                correctAnswer: 2,
+                explanation: "Wimbledon is a famous tennis tournament held annually in London."
+            },
+            {
+                question: "What is the name of the document that lists the specific freedoms and rights of UK citizens?",
+                options: ["The Bill of Rights", "The Magna Carta", "The Human Rights Act", "The Freedom Charter"],
+                correctAnswer: 0,
+                explanation: "The Bill of Rights (1689) is a historic document that sets out specific freedoms and rights for UK citizens."
+            },
+            {
+                question: "Which of these is NOT a legal responsibility in the UK?",
+                options: ["Paying taxes", "Serving on a jury", "Voting in elections", "Registering births and deaths"],
+                correctAnswer: 2,
+                explanation: "Voting in elections is a right but not a legal responsibility in the UK. It is not compulsory to vote."
+            },
+            {
+                question: "What is the national flower of Wales?",
+                options: ["Thistle", "Shamrock", "Rose", "Daffodil"],
+                correctAnswer: 3,
+                explanation: "The daffodil is the national flower of Wales."
+            },
+            {
+                question: "Which of these is a famous British scientist who discovered penicillin?",
+                options: ["Isaac Newton", "Alexander Fleming", "Charles Darwin", "Stephen Hawking"],
+                correctAnswer: 1,
+                explanation: "Alexander Fleming discovered penicillin in 1928, which revolutionized the treatment of bacterial infections."
+            },
+            {
+                question: "What is the highest civilian award for gallantry in the UK?",
+                options: ["Victoria Cross", "George Cross", "Order of the Garter", "Order of Merit"],
+                correctAnswer: 1,
+                explanation: "The George Cross is the highest civilian award for gallantry in the UK."
+            },
+            {
+                question: "Which of these is NOT one of the fundamental principles of British life?",
+                options: ["Democracy", "The rule of law", "Individual liberty", "Mandatory military service"],
+                correctAnswer: 3,
+                explanation: "The fundamental principles of British life include democracy, the rule of law, individual liberty, and mutual respect and tolerance. Mandatory military service is not one of them."
+            },
+            {
+                question: "What is the name of the UK's national police service that deals with serious crime and terrorism?",
+                options: ["Metropolitan Police", "National Crime Agency", "MI5", "Scotland Yard"],
+                correctAnswer: 1,
+                explanation: "The National Crime Agency (NCA) is the UK's national police service that deals with serious and organized crime."
+            },
+            {
+                question: "When did women get the right to vote on the same terms as men in the UK?",
+                options: ["1918", "1928", "1945", "1967"],
+                correctAnswer: 1,
+                explanation: "Women in the UK got the right to vote on the same terms as men in 1928 with the Equal Franchise Act."
+            },
+            {
+                question: "What is the name of the UK's public health service?",
+                options: ["NHS", "PHE", "DHSC", "NICE"],
+                correctAnswer: 0,
+                explanation: "The National Health Service (NHS) is the UK's public health service, providing healthcare for all UK citizens based on need, not ability to pay."
+            },
+            {
+                question: "Which of these is a famous British playwright?",
+                options: ["Charles Dickens", "Jane Austen", "William Shakespeare", "J.K. Rowling"],
+                correctAnswer: 2,
+                explanation: "William Shakespeare is a famous British playwright who wrote many plays including Romeo and Juliet, Macbeth, and Hamlet."
+            },
+            {
+                question: "What is the name of the UK's national day?",
+                options: ["St George's Day", "Commonwealth Day", "Remembrance Day", "There is no official national day"],
+                correctAnswer: 3,
+                explanation: "The UK does not have an official national day, unlike many other countries."
+            }
+        ];
+
+        // DOM Elements
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const practiceMode = document.getElementById('practiceMode');
+        const testMode = document.getElementById('testMode');
+        const testResults = document.getElementById('testResults');
+        const bookmarksScreen = document.getElementById('bookmarksScreen');
+
+        const practiceBtn = document.getElementById('practiceBtn');
+        const testBtn = document.getElementById('testBtn');
+        const bookmarksBtn = document.getElementById('bookmarksBtn');
+        const startPracticeBtn = document.getElementById('startPracticeBtn');
+        const startTestBtn = document.getElementById('startTestBtn');
+        const prevQuestionBtn = document.getElementById('prevQuestionBtn');
+        const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+        const bookmarkBtn = document.getElementById('bookmarkBtn');
+        const submitTestBtn = document.getElementById('submitTestBtn');
+        const reviewTestBtn = document.getElementById('reviewTestBtn');
+        const newTestBtn = document.getElementById('newTestBtn');
+        const clearBookmarksBtn = document.getElementById('clearBookmarksBtn');
+        const startBookmarkPracticeBtn = document.getElementById('startBookmarkPracticeBtn');
+
+        // State
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let bookmarkedQuestions = [];
+        let testQuestions = [];
+        let testAnswers = [];
+        let testTimer;
+        let testTimeRemaining = 45 * 60; // 45 minutes in seconds
+        let isPracticeMode = true;
+
+        // Initialize
+        loadBookmarks();
+        
+        // Event Listeners
+        practiceBtn.addEventListener('click', showPracticeMode);
+        testBtn.addEventListener('click', showTestMode);
+        bookmarksBtn.addEventListener('click', showBookmarks);
+        startPracticeBtn.addEventListener('click', startPractice);
+        startTestBtn.addEventListener('click', startTest);
+        prevQuestionBtn.addEventListener('click', showPreviousQuestion);
+        nextQuestionBtn.addEventListener('click', showNextQuestion);
+        bookmarkBtn.addEventListener('click', toggleBookmark);
+        submitTestBtn.addEventListener('click', submitTest);
+        reviewTestBtn.addEventListener('click', reviewTest);
+        newTestBtn.addEventListener('click', startTest);
+        clearBookmarksBtn.addEventListener('click', clearBookmarks);
+        startBookmarkPracticeBtn.addEventListener('click', startPractice);
+
+        // Functions
+        function showScreen(screen) {
+            welcomeScreen.classList.add('hidden');
+            practiceMode.classList.add('hidden');
+            testMode.classList.add('hidden');
+            testResults.classList.add('hidden');
+            bookmarksScreen.classList.add('hidden');
+            
+            screen.classList.remove('hidden');
+        }
+
+        function showPracticeMode() {
+            showScreen(welcomeScreen);
+        }
+
+        function showTestMode() {
+            showScreen(welcomeScreen);
+            document.getElementById('startTestBtn').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showBookmarks() {
+            renderBookmarks();
+            showScreen(bookmarksScreen);
+        }
+
+        function startPractice() {
+            isPracticeMode = true;
+            currentQuestionIndex = 0;
+            userAnswers = Array(questions.length).fill(null);
+            renderQuestion();
+            updateProgress();
+            showScreen(practiceMode);
+        }
+
+        function startTest() {
+            isPracticeMode = false;
+            // Select 24 random questions
+            testQuestions = [...questions]
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 24);
+            testAnswers = Array(testQuestions.length).fill(null);
+            
+            // Reset and start timer
+            clearInterval(testTimer);
+            testTimeRemaining = 45 * 60;
+            updateTestTimer();
+            testTimer = setInterval(updateTestTimer, 1000);
+            
+            renderTestQuestions();
+            updateTestProgress();
+            showScreen(testMode);
+        }
+
+        function renderQuestion() {
+            const question = questions[currentQuestionIndex];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestionIndex + 1}/${questions.length}`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionBtn = document.createElement('button');
+                optionBtn.className = 'option-btn w-full text-left p-4 border rounded-lg transition';
+                
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionBtn.classList.add('selected');
+                    if (index === question.correctAnswer) {
+                        optionBtn.classList.add('correct');
+                    } else {
+                        optionBtn.classList.add('incorrect');
+                    }
+                }
+                
+                optionBtn.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full border text-sm">${String.fromCharCode(65 + index)}</span>
+                        <span>${option}</span>
+                    </div>
+                `;
+                
+                optionBtn.addEventListener('click', () => selectAnswer(index));
+                optionsContainer.appendChild(optionBtn);
+            });
+            
+            // Update bookmark button
+            if (isBookmarked(currentQuestionIndex)) {
+                bookmarkBtn.classList.add('text-yellow-500');
+                bookmarkBtn.classList.remove('text-gray-400');
+            } else {
+                bookmarkBtn.classList.add('text-gray-400');
+                bookmarkBtn.classList.remove('text-yellow-500');
+            }
+            
+            // Show/hide explanation
+            const explanationContainer = document.getElementById('explanationContainer');
+            if (userAnswers[currentQuestionIndex] !== null) {
+                explanationContainer.classList.remove('hidden');
+                document.getElementById('explanationText').textContent = question.explanation;
+            } else {
+                explanationContainer.classList.add('hidden');
+            }
+            
+            // Update navigation buttons
+            prevQuestionBtn.disabled = currentQuestionIndex === 0;
+            if (prevQuestionBtn.disabled) {
+                prevQuestionBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                prevQuestionBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        function selectAnswer(optionIndex) {
+            if (!isPracticeMode) return;
+            
+            userAnswers[currentQuestionIndex] = optionIndex;
+            renderQuestion();
+            updateProgress();
+        }
+
+        function showPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        function showNextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const answeredCount = userAnswers.filter(answer => answer !== null).length;
+            const correctCount = userAnswers.reduce((count, answer, index) => {
+                return count + (answer === questions[index].correctAnswer ? 1 : 0);
+            }, 0);
+            
+            document.getElementById('answeredCount').textContent = answeredCount;
+            document.getElementById('totalQuestions').textContent = questions.length;
+            document.getElementById('correctCount').textContent = correctCount;
+            
+            const progressPercentage = (answeredCount / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercentage}%`;
+        }
+
+        function toggleBookmark() {
+            const questionIndex = currentQuestionIndex;
+            
+            if (isBookmarked(questionIndex)) {
+                bookmarkedQuestions = bookmarkedQuestions.filter(i => i !== questionIndex);
+            } else {
+                bookmarkedQuestions.push(questionIndex);
+            }
+            
+            saveBookmarks();
+            renderQuestion();
+        }
+
+        function isBookmarked(questionIndex) {
+            return bookmarkedQuestions.includes(questionIndex);
+        }
+
+        function saveBookmarks() {
+            localStorage.setItem('lifeInUkBookmarks', JSON.stringify(bookmarkedQuestions));
+        }
+
+        function loadBookmarks() {
+            const saved = localStorage.getItem('lifeInUkBookmarks');
+            if (saved) {
+                bookmarkedQuestions = JSON.parse(saved);
+            }
+        }
+
+        function renderBookmarks() {
+            const container = document.getElementById('bookmarksContainer');
+            
+            if (bookmarkedQuestions.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                        <p class="text-gray-600">You haven't bookmarked any questions yet.</p>
+                        <button id="startBookmarkPracticeBtn" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition">Start Practice</button>
+                    </div>
+                `;
+                document.getElementById('startBookmarkPracticeBtn').addEventListener('click', startPractice);
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            bookmarkedQuestions.forEach(index => {
+                const question = questions[index];
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-xl shadow-md p-6';
+                
+                let optionsHtml = '';
+                question.options.forEach((option, i) => {
+                    const isCorrect = i === question.correctAnswer;
+                    optionsHtml += `
+                        <div class="flex items-center p-3 ${isCorrect ? 'bg-green-50 border-green-200' : ''} border rounded-lg mb-2">
+                            <span class="inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full border text-sm ${isCorrect ? 'bg-green-100 border-green-400' : ''}">${String.fromCharCode(65 + i)}</span>
+                            <span>${option}</span>
+                            ${isCorrect ? '<span class="ml-auto text-green-600">✓</span>' : ''}
+                        </div>
+                    `;
+                });
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Question ${index + 1}</span>
+                        <button class="remove-bookmark text-yellow-500 hover:text-yellow-600 transition" data-index="${index}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">${question.question}</h3>
+                    <div class="mb-4">
+                        ${optionsHtml}
+                    </div>
+                    <div class="p-4 bg-blue-50 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-2">Explanation:</h4>
+                        <p class="text-gray-700">${question.explanation}</p>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            // Add event listeners to remove bookmark buttons
+            document.querySelectorAll('.remove-bookmark').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    bookmarkedQuestions = bookmarkedQuestions.filter(i => i !== index);
+                    saveBookmarks();
+                    renderBookmarks();
+                });
+            });
+        }
+
+        function clearBookmarks() {
+            if (confirm('Are you sure you want to clear all bookmarks?')) {
+                bookmarkedQuestions = [];
+                saveBookmarks();
+                renderBookmarks();
+            }
+        }
+
+        function renderTestQuestions() {
+            const container = document.querySelector('#testMode .grid');
+            container.innerHTML = '';
+            
+            testQuestions.forEach((question, index) => {
+                const card = document.createElement('div');
+                card.className = 'question-card bg-white rounded-xl shadow-md overflow-hidden';
+                
+                let optionsHtml = '';
+                question.options.forEach((option, i) => {
+                    const isSelected = testAnswers[index] === i;
+                    optionsHtml += `
+                        <button class="test-option w-full text-left p-3 border rounded-lg mb-2 transition ${isSelected ? 'bg-indigo-100 border-indigo-400' : 'hover:bg-gray-50'}" 
+                                data-question="${index}" data-option="${i}">
+                            <div class="flex items-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full border text-sm">${String.fromCharCode(65 + i)}</span>
+                                <span>${option}</span>
+                            </div>
+                        </button>
+                    `;
+                });
+                
+                card.innerHTML = `
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Question ${index + 1}</span>
+                            <span class="test-status text-sm ${testAnswers[index] !== null ? 'text-green-600' : 'text-gray-400'}">
+                                ${testAnswers[index] !== null ? 'Answered' : 'Not answered'}
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">${question.question}</h3>
+                        <div class="space-y-2">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            // Add event listeners to test options
+            document.querySelectorAll('.test-option').forEach(button => {
+                button.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.getAttribute('data-question'));
+                    const optionIndex = parseInt(this.getAttribute('data-option'));
+                    
+                    testAnswers[questionIndex] = optionIndex;
+                    updateTestProgress();
+                    renderTestQuestions();
+                });
+            });
+        }
+
+        function updateTestProgress() {
+            const answeredCount = testAnswers.filter(answer => answer !== null).length;
+            document.getElementById('testAnsweredCount').textContent = answeredCount;
+            
+            const progressPercentage = (answeredCount / testQuestions.length) * 100;
+            document.getElementById('testProgressBar').style.width = `${progressPercentage}%`;
+        }
+
+        function updateTestTimer() {
+            if (testTimeRemaining <= 0) {
+                clearInterval(testTimer);
+                submitTest();
+                return;
+            }
+            
+            const minutes = Math.floor(testTimeRemaining / 60);
+            const seconds = testTimeRemaining % 60;
+            const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            document.getElementById('timer').textContent = formattedTime;
+            document.getElementById('testTimeRemaining').textContent = `Time remaining: ${formattedTime}`;
+            
+            testTimeRemaining--;
+        }
+
+        function submitTest() {
+            clearInterval(testTimer);
+            
+            // Calculate results
+            const correctAnswers = testAnswers.reduce((count, answer, index) => {
+                return count + (answer === testQuestions[index].correctAnswer ? 1 : 0);
+            }, 0);
+            
+            const scorePercentage = Math.round((correctAnswers / testQuestions.length) * 100);
+            const isPassed = correctAnswers >= 18; // 75% pass mark
+            
+            // Update results screen
+            document.getElementById('passFailBadge').textContent = isPassed ? 'PASSED' : 'FAILED';
+            document.getElementById('passFailBadge').className = `inline-block px-4 py-2 rounded-full text-white font-semibold mb-4 ${isPassed ? 'bg-green-600' : 'bg-red-600'}`;
+            
+            document.getElementById('scorePercentage').textContent = scorePercentage;
+            document.getElementById('correctAnswers').textContent = correctAnswers;
+            document.getElementById('resultsProgressBar').style.width = `${scorePercentage}%`;
+            document.getElementById('resultsProgressBar').className = `h-4 rounded-full ${isPassed ? 'bg-green-600' : 'bg-red-600'}`;
+            
+            showScreen(testResults);
+        }
+
+        function reviewTest() {
+            // Render test questions with correct answers
+            const container = document.querySelector('#testResults');
+            const reviewContainer = document.createElement('div');
+            reviewContainer.className = 'mt-8';
+            
+            let reviewHtml = `
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Question Review</h3>
+                <div class="space-y-6">
+            `;
+            
+            testQuestions.forEach((question, index) => {
+                const userAnswer = testAnswers[index];
+                const isCorrect = userAnswer === question.correctAnswer;
+                
+                reviewHtml += `
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Question ${index + 1}</span>
+                            <span class="font-medium ${isCorrect ? 'text-green-600' : 'text-red-600'}">
+                                ${isCorrect ? 'Correct' : 'Incorrect'}
+                            </span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">${question.question}</h4>
+                `;
+                
+                question.options.forEach((option, i) => {
+                    const isUserAnswer = userAnswer === i;
+                    const isCorrectAnswer = question.correctAnswer === i;
+                    
+                    let optionClass = 'border';
+                    if (isUserAnswer && isCorrectAnswer) {
+                        optionClass = 'bg-green-100 border-green-400';
+                    } else if (isUserAnswer && !isCorrectAnswer) {
+                        optionClass = 'bg-red-100 border-red-400';
+                    } else if (isCorrectAnswer) {
+                        optionClass = 'bg-green-50 border-green-200';
+                    }
+                    
+                    reviewHtml += `
+                        <div class="flex items-center p-3 ${optionClass} rounded-lg mb-2">
+                            <span class="inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full border text-sm">${String.fromCharCode(65 + i)}</span>
+                            <span>${option}</span>
+                            ${isCorrectAnswer ? '<span class="ml-auto text-green-600">✓</span>' : ''}
+                            ${isUserAnswer && !isCorrectAnswer ? '<span class="ml-auto text-red-600">✗</span>' : ''}
+                        </div>
+                    `;
+                });
+                
+                reviewHtml += `
+                        <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                            <h5 class="font-semibold text-gray-800 mb-2">Explanation:</h5>
+                            <p class="text-gray-700">${question.explanation}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            reviewHtml += `
+                </div>
+                <div class="mt-8 text-center">
+                    <button id="backToResultsBtn" class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition">Back to Results</button>
+                </div>
+            `;
+            
+            reviewContainer.innerHTML = reviewHtml;
+            
+            // Remove previous review if exists
+            const existingReview = container.querySelector('.mt-8');
+            if (existingReview) {
+                existingReview.remove();
+            }
+            
+            container.appendChild(reviewContainer);
+            
+            // Add event listener to back button
+            document.getElementById('backToResultsBtn').addEventListener('click', function() {
+                reviewContainer.remove();
+            });
+        }
+    });
+</script>
+
+    </div>
+</body>
+</html>
