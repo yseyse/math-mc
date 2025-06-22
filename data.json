@@ -1,0 +1,17 @@
+{
+  "title": "Life in the UK Test",
+  "questions": [
+    {
+      "id": 1,
+      "question": "When did the UK join the European Economic Community?",
+      "options": ["1957", "1973", "1981", "1992"],
+      "answer": "1973"
+    },
+    {
+      "id": 2,
+      "question": "Who wrote 'Pride and Prejudice'?",
+      "options": ["Charles Dickens", "Jane Austen", "George Eliot", "Virginia Woolf"],
+      "answer": "Jane Austen"
+    }
+  ]
+}
