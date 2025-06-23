@@ -1,19 +1,18 @@
 question,option_1,option_2,option_3,option_4,correctAnswer,explanation
-"Choose the correct answer for the question below:
-\[ \frac{(27x)^5}{(3x^{-2})^4} = \]",\(3^2 x^3\),\(3^4 x^3\),\(3^{11} x^{13}\),\(3^{14} x^{13}\),3,The correct answer is C.
-What is the name of the ceremony to become a British citizen?,Citizenship Test,Naturalization Ceremony,Oath Ceremony,Citizenship Ceremony,4,The final stage in becoming a British citizen is attending a citizenship ceremony where you make an oath of allegiance.
-Which of these is NOT one of the four patron saints of the UK?,St George,St David,St Patrick,St Paul,4,"The four patron saints are St George (England), St Andrew (Scotland), St David (Wales), and St Patrick (Northern Ireland). St Paul is not a patron saint of any UK nation."
-When is St David's Day?,1st March,17th March,23rd April,30th November,1,St David's Day is celebrated on 1st March in Wales.
-What is the Church of England sometimes called?,Catholic Church,Anglican Church,Protestant Church,Methodist Church,2,The Church of England is also known as the Anglican Church.
-Who is the heir to the throne of the United Kingdom?,Prince Harry,Prince William,Prince Charles,Princess Anne,2,"Prince William, the Prince of Wales, is the heir to the throne following the accession of King Charles III."
-What is the capital of Scotland?,Glasgow,Aberdeen,Edinburgh,Dundee,3,Edinburgh is the capital city of Scotland.
-What flower is traditionally worn by people on Remembrance Day?,Daffodil,Poppy,Rose,Thistle,2,The red poppy is worn on Remembrance Day to commemorate those who died in the First World War and later conflicts.
-What is the minimum age to vote in UK general elections?,16,17,18,21,3,The minimum voting age for UK general elections is 18 years old.
-Which of these is NOT a devolved administration in the UK?,Scottish Parliament,Northern Ireland Assembly,Welsh Parliament,Yorkshire Assembly,4,"The UK has three devolved administrations: the Scottish Parliament, the Northern Ireland Assembly, and the Welsh Parliament (Senedd Cymru). There is no Yorkshire Assembly."
-"Who was the first Briton to win the Olympic gold medal in the 10,000 meters?",Sebastian Coe,Mo Farah,Steve Ovett,Linford Christie,2,"Mo Farah was the first Briton to win an Olympic gold medal in the 10,000 meters at the 2012 London Olympics."
-What is the name of the clock tower at the Houses of Parliament?,Big Ben,Elizabeth Tower,Victoria Tower,Westminster Tower,2,The clock tower is officially called the Elizabeth Tower. Big Ben is actually the name of the main bell inside the tower.
-Which of these is a famous tennis tournament held in the UK?,The Open Championship,The Grand National,Wimbledon,The FA Cup,3,Wimbledon is a famous tennis tournament held annually in London.
-What is the name of the document that lists the specific freedoms and rights of UK citizens?,The Bill of Rights,The Magna Carta,The Human Rights Act,The Freedom Charter,1,The Bill of Rights (1689) is a historic document that sets out specific freedoms and rights for UK citizens.
+\[ \frac{(27x)^5}{(3x^{-2})^4} = \],\(3^2 x^3\),\(3^4 x^3\),\(3^{11} x^{13}\),\(3^{14} x^{13}\),3,xãx!
+\[ \frac{(2\alpha)^3}{(4\alpha^{-5})^{-1}} = \],\(2\alpha^8\),\(32\alpha^8\),\(\frac{2}{\alpha^2}\),\(\frac{32}{\alpha^2}\),4,xãx!
+\[ 4^{n+2} \cdot 3^{2n+4} = \],\(6^{2n+4}\),\(6^{4n+8}\),\(12^{2n+4}\),\(12^{3n+6}\),1,xãx!
+\[ \frac{81^{2n+3}}{(27^{n+1})^2} = \],\(3\),\(3^{2n+6}\),\(3^{4n+8}\),\(3^{10n+14}\),2,xãx!
+\[ \frac{(2^n)(8^{3n})}{64^n} = \],\(4^n\),\(4^{2n}\),\(4^{-3n}\),\(4^{-4n}\),2,xãx!
+\[ \frac{6x}{(3x^{-5})^{-2}} = \],\(54x^8\),\(\frac{2x^8}{3}\),\(\frac{54}{x^9}\),\(\frac{2}{3x^9}\),3,xãx!
+\[ \frac{(6x^7)^2}{4x^5} = \],\(3x^4\),\(9x^4\),\(3x^9\),\(9x^9\),4,xãx!
+\[ \frac{8^{2n+1}}{4^{3n+1}} = \],1,2,\ (2^n\ ),\ (2^{-n}\ ),2,xãx!
+\[ \left( \frac{1}{9^{555}} \right) \cdot 3^{444} = \],0,\(\frac{1}{3^{111}}\),\(\frac{1}{3^{222}}\),\(\frac{1}{3^{666}}\),4,xãx!
+\[ 8^{222} \cdot 5^{666} = \],\ (10^{666})\ ,\ (10^{888})\ ,\ (40^{666})\ ,\ (40^{888})\ ,1,xãx!
+\[ \frac{(3y^6)^4}{3y^2} = \],\(4y^5\),\(4y^8\),\(27y^{12}\),\(27y^{22}\),4,xãx!
+\[ (2n^3)^{-5} = \],\(\frac{1}{32n^2}\),\(\frac{1}{32n^{15}}\),\(\frac{1}{10n^{125}}\),\(\frac{1}{10n^{243}}\),2,xãx!
+\[ (27 \cdot 9^{n+1})^3 = \],\ (3^{6n+12})\ ,\ (3^{6n+15})\ ,\ (3^{9n+12})\ ,\ (3^{9n+18})\ ,2,xãx!
+\[ \frac{(2x^4)^3}{2x^5} = \],\(3x^2\),\(3x^7\),\(4x^7\),\(4x^{59}\),3,xãx!
 Which of these is NOT a legal responsibility in the UK?,Paying taxes,Serving on a jury,Voting in elections,Registering births and deaths,3,Voting in elections is a right but not a legal responsibility in the UK. It is not compulsory to vote.
 What is the national flower of Wales?,Thistle,Shamrock,Rose,Daffodil,4,The daffodil is the national flower of Wales.
 Which of these is a famous British scientist who discovered penicillin?,Isaac Newton,Alexander Fleming,Charles Darwin,Stephen Hawking,2,"Alexander Fleming discovered penicillin in 1928, which revolutionized the treatment of bacterial infections."
