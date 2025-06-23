@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Math MC Test Practice</title>
+    <title>Math MC Practice</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
     <style>
         .fade-in {
             animation: fadeIn 0.5s ease-in-out;
@@ -17,6 +18,8 @@
         .correct { background-color: #d1fae5 !important; border-color: #10b981 !important; }
         .incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body class="bg-gray-100">
     <div id="app">
@@ -42,8 +45,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                         </svg>
                     </div>
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Welcome to Life in the UK Test Practice</h2>
-                    <p class="text-gray-600 text-center mb-8">Prepare for your citizenship test with our comprehensive question bank and mock tests.</p>
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Welcome to Math MC Practice</h2>
+                    <p class="text-gray-600 text-center mb-8">Prepare for your Math MC test with our comprehensive question bank and realistic mock exams.</p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         <div class="bg-indigo-50 p-6 rounded-lg text-center">
@@ -64,14 +67,14 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-indigo-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                             </svg>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Bookmarks</h3>
-                            <p class="text-gray-600">Save difficult questions to review them later.</p>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">View Your Score</h3>
+                            <p class="text-gray-600">Check your results instantly after completing each test.</p>
                         </div>
                     </div>
                     
                     <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
                         <button id="startPracticeBtn" class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition">Start Practice</button>
-                        <button id="startTestBtn" class="px-6 py-3 bg-indigo-100 text-indigo-600 rounded-lg font-medium hover:bg-indigo-200 transition">Take Mock Test</button>
+                        <button style="display: none;" id="startTestBtn" class="px-6 py-3 bg-indigo-100 text-indigo-600 rounded-lg font-medium hover:bg-indigo-200 transition">Take Mock Test</button>
                     </div>
                 </div>
             </div>
@@ -90,7 +93,7 @@
             <div id="questionContainer" class="question-card bg-white rounded-xl shadow-md overflow-hidden p-6 mb-6">
                 <div class="flex justify-between items-center mb-4">
                     <span id="questionNumber" class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Question 1/24</span>
-                    <button id="bookmarkBtn" class="text-gray-400 hover:text-yellow-500 transition">
+                    <button style="display: none;" id="bookmarkBtn" class="text-gray-400 hover:text-yellow-500 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                         </svg>
@@ -201,8 +204,8 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
-                    <h3 class="text-xl font-bold mb-2">Life in the UK Test Practice</h3>
-                    <p class="text-gray-400">Prepare for your citizenship test with confidence</p>
+                    <h3 class="text-xl font-bold mb-2">Math MC Practice</h3>
+                    <p class="text-gray-400">Prepare for Math MC test with confidence</p>
                 </div>
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-400 hover:text-white transition">About</a>
@@ -211,162 +214,41 @@
                 </div>
             </div>
             <div class="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
-                <p>© 2023 Life in the UK Test Practice. All rights reserved.</p>
+                <p>© 2025 Data In. All rights reserved.</p>
             </div>
         </div>
     </footer>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Data
-        const questions = [
-            {
-                question: "Which of these is a British overseas territory?",
-                options: ["Malta", "Cyprus", "Gibraltar", "Republic of Ireland"],
-                correctAnswer: 2,
-                explanation: "Gibraltar is a British overseas territory located at the southern tip of the Iberian Peninsula."
-            },
-            {
-                question: "What is the name of the ceremony to become a British citizen?",
-                options: ["Citizenship Test", "Naturalization Ceremony", "Oath Ceremony", "Citizenship Ceremony"],
-                correctAnswer: 3,
-                explanation: "The final stage in becoming a British citizen is attending a citizenship ceremony where you make an oath of allegiance."
-            },
-            {
-                question: "Which of these is NOT one of the four patron saints of the UK?",
-                options: ["St George", "St David", "St Patrick", "St Paul"],
-                correctAnswer: 3,
-                explanation: "The four patron saints are St George (England), St Andrew (Scotland), St David (Wales), and St Patrick (Northern Ireland). St Paul is not a patron saint of any UK nation."
-            },
-            {
-                question: "When is St David's Day?",
-                options: ["1st March", "17th March", "23rd April", "30th November"],
-                correctAnswer: 0,
-                explanation: "St David's Day is celebrated on 1st March in Wales."
-            },
-            {
-                question: "What is the Church of England sometimes called?",
-                options: ["Catholic Church", "Anglican Church", "Protestant Church", "Methodist Church"],
-                correctAnswer: 1,
-                explanation: "The Church of England is also known as the Anglican Church."
-            },
-            {
-                question: "Who is the heir to the throne of the United Kingdom?",
-                options: ["Prince Harry", "Prince William", "Prince Charles", "Princess Anne"],
-                correctAnswer: 1,
-                explanation: "Prince William, the Prince of Wales, is the heir to the throne following the accession of King Charles III."
-            },
-            {
-                question: "What is the capital of Scotland?",
-                options: ["Glasgow", "Aberdeen", "Edinburgh", "Dundee"],
-                correctAnswer: 2,
-                explanation: "Edinburgh is the capital city of Scotland."
-            },
-            {
-                question: "What flower is traditionally worn by people on Remembrance Day?",
-                options: ["Daffodil", "Poppy", "Rose", "Thistle"],
-                correctAnswer: 1,
-                explanation: "The red poppy is worn on Remembrance Day to commemorate those who died in the First World War and later conflicts."
-            },
-            {
-                question: "What is the minimum age to vote in UK general elections?",
-                options: ["16", "17", "18", "21"],
-                correctAnswer: 2,
-                explanation: "The minimum voting age for UK general elections is 18 years old."
-            },
-            {
-                question: "Which of these is NOT a devolved administration in the UK?",
-                options: ["Scottish Parliament", "Northern Ireland Assembly", "Welsh Parliament", "Yorkshire Assembly"],
-                correctAnswer: 3,
-                explanation: "The UK has three devolved administrations: the Scottish Parliament, the Northern Ireland Assembly, and the Welsh Parliament (Senedd Cymru). There is no Yorkshire Assembly."
-            },
-            {
-                question: "Who was the first Briton to win the Olympic gold medal in the 10,000 meters?",
-                options: ["Sebastian Coe", "Mo Farah", "Steve Ovett", "Linford Christie"],
-                correctAnswer: 1,
-                explanation: "Mo Farah was the first Briton to win an Olympic gold medal in the 10,000 meters at the 2012 London Olympics."
-            },
-            {
-                question: "What is the name of the clock tower at the Houses of Parliament?",
-                options: ["Big Ben", "Elizabeth Tower", "Victoria Tower", "Westminster Tower"],
-                correctAnswer: 1,
-                explanation: "The clock tower is officially called the Elizabeth Tower. Big Ben is actually the name of the main bell inside the tower."
-            },
-            {
-                question: "Which of these is a famous tennis tournament held in the UK?",
-                options: ["The Open Championship", "The Grand National", "Wimbledon", "The FA Cup"],
-                correctAnswer: 2,
-                explanation: "Wimbledon is a famous tennis tournament held annually in London."
-            },
-            {
-                question: "What is the name of the document that lists the specific freedoms and rights of UK citizens?",
-                options: ["The Bill of Rights", "The Magna Carta", "The Human Rights Act", "The Freedom Charter"],
-                correctAnswer: 0,
-                explanation: "The Bill of Rights (1689) is a historic document that sets out specific freedoms and rights for UK citizens."
-            },
-            {
-                question: "Which of these is NOT a legal responsibility in the UK?",
-                options: ["Paying taxes", "Serving on a jury", "Voting in elections", "Registering births and deaths"],
-                correctAnswer: 2,
-                explanation: "Voting in elections is a right but not a legal responsibility in the UK. It is not compulsory to vote."
-            },
-            {
-                question: "What is the national flower of Wales?",
-                options: ["Thistle", "Shamrock", "Rose", "Daffodil"],
-                correctAnswer: 3,
-                explanation: "The daffodil is the national flower of Wales."
-            },
-            {
-                question: "Which of these is a famous British scientist who discovered penicillin?",
-                options: ["Isaac Newton", "Alexander Fleming", "Charles Darwin", "Stephen Hawking"],
-                correctAnswer: 1,
-                explanation: "Alexander Fleming discovered penicillin in 1928, which revolutionized the treatment of bacterial infections."
-            },
-            {
-                question: "What is the highest civilian award for gallantry in the UK?",
-                options: ["Victoria Cross", "George Cross", "Order of the Garter", "Order of Merit"],
-                correctAnswer: 1,
-                explanation: "The George Cross is the highest civilian award for gallantry in the UK."
-            },
-            {
-                question: "Which of these is NOT one of the fundamental principles of British life?",
-                options: ["Democracy", "The rule of law", "Individual liberty", "Mandatory military service"],
-                correctAnswer: 3,
-                explanation: "The fundamental principles of British life include democracy, the rule of law, individual liberty, and mutual respect and tolerance. Mandatory military service is not one of them."
-            },
-            {
-                question: "What is the name of the UK's national police service that deals with serious crime and terrorism?",
-                options: ["Metropolitan Police", "National Crime Agency", "MI5", "Scotland Yard"],
-                correctAnswer: 1,
-                explanation: "The National Crime Agency (NCA) is the UK's national police service that deals with serious and organized crime."
-            },
-            {
-                question: "When did women get the right to vote on the same terms as men in the UK?",
-                options: ["1918", "1928", "1945", "1967"],
-                correctAnswer: 1,
-                explanation: "Women in the UK got the right to vote on the same terms as men in 1928 with the Equal Franchise Act."
-            },
-            {
-                question: "What is the name of the UK's public health service?",
-                options: ["NHS", "PHE", "DHSC", "NICE"],
-                correctAnswer: 0,
-                explanation: "The National Health Service (NHS) is the UK's public health service, providing healthcare for all UK citizens based on need, not ability to pay."
-            },
-            {
-                question: "Which of these is a famous British playwright?",
-                options: ["Charles Dickens", "Jane Austen", "William Shakespeare", "J.K. Rowling"],
-                correctAnswer: 2,
-                explanation: "William Shakespeare is a famous British playwright who wrote many plays including Romeo and Juliet, Macbeth, and Hamlet."
-            },
-            {
-                question: "What is the name of the UK's national day?",
-                options: ["St George's Day", "Commonwealth Day", "Remembrance Day", "There is no official national day"],
-                correctAnswer: 3,
-                explanation: "The UK does not have an official national day, unlike many other countries."
-            }
-        ];
+    let questions = [];
 
+    document.addEventListener('DOMContentLoaded', function () {
+        (async function () {
+            try {
+                const response = await fetch('https://yseyse.github.io/math-mc/data.csv'); // local or full path
+                const csvText = await response.text();
+
+                const parsed = Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true
+                });
+
+                questions = parsed.data.map(row => ({
+                    question: row.question,
+                    options: [row.option_1, row.option_2, row.option_3, row.option_4],
+                    correctAnswer: parseInt(row.correctAnswer) - 1, // adjust back to 0-based
+                    explanation: row.explanation
+                }));
+
+                console.log("Loaded questions:", questions);
+                // Optionally call startPractice or render UI
+
+            } catch (error) {
+                console.error('Error loading CSV:', error);
+            }
+        })();
+		
         // DOM Elements
         const welcomeScreen = document.getElementById('welcomeScreen');
         const practiceMode = document.getElementById('practiceMode');
@@ -472,7 +354,11 @@
         function renderQuestion() {
             const question = questions[currentQuestionIndex];
             document.getElementById('questionNumber').textContent = `Question ${currentQuestionIndex + 1}/${questions.length}`;
-            document.getElementById('questionText').textContent = question.question;
+			
+			const questionTextEl = document.getElementById('questionText');
+			questionTextEl.innerHTML = question.question;
+			MathJax.typesetPromise([questionTextEl]);
+
             
             const optionsContainer = document.getElementById('optionsContainer');
             optionsContainer.innerHTML = '';
@@ -493,12 +379,15 @@
                 optionBtn.innerHTML = `
                     <div class="flex items-center">
                         <span class="inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full border text-sm">${String.fromCharCode(65 + index)}</span>
-                        <span>${option}</span>
+                        <span class="option-text">${option}</span>
                     </div>
                 `;
                 
                 optionBtn.addEventListener('click', () => selectAnswer(index));
                 optionsContainer.appendChild(optionBtn);
+				
+                // MathJax render for each option
+                MathJax.typesetPromise([optionBtn]);
             });
             
             // Update bookmark button
@@ -514,7 +403,10 @@
             const explanationContainer = document.getElementById('explanationContainer');
             if (userAnswers[currentQuestionIndex] !== null) {
                 explanationContainer.classList.remove('hidden');
-                document.getElementById('explanationText').textContent = question.explanation;
+                const explanationEl = document.getElementById('explanationText');
+                explanationEl.innerHTML = question.explanation;
+                MathJax.typesetPromise([explanationEl]);
+
             } else {
                 explanationContainer.classList.add('hidden');
             }
@@ -619,7 +511,7 @@
                     optionsHtml += `
                         <div class="flex items-center p-3 ${isCorrect ? 'bg-green-50 border-green-200' : ''} border rounded-lg mb-2">
                             <span class="inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full border text-sm ${isCorrect ? 'bg-green-100 border-green-400' : ''}">${String.fromCharCode(65 + i)}</span>
-                            <span>${option}</span>
+                            <span class="option-text">${option}</span>
                             ${isCorrect ? '<span class="ml-auto text-green-600">✓</span>' : ''}
                         </div>
                     `;
@@ -682,7 +574,7 @@
                                 data-question="${index}" data-option="${i}">
                             <div class="flex items-center">
                                 <span class="inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full border text-sm">${String.fromCharCode(65 + i)}</span>
-                                <span>${option}</span>
+                                <span class="option-text">${option}</span>
                             </div>
                         </button>
                     `;
@@ -809,7 +701,7 @@
                     reviewHtml += `
                         <div class="flex items-center p-3 ${optionClass} rounded-lg mb-2">
                             <span class="inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full border text-sm">${String.fromCharCode(65 + i)}</span>
-                            <span>${option}</span>
+                            <span class="option-text">${option}</span>
                             ${isCorrectAnswer ? '<span class="ml-auto text-green-600">✓</span>' : ''}
                             ${isUserAnswer && !isCorrectAnswer ? '<span class="ml-auto text-red-600">✗</span>' : ''}
                         </div>
