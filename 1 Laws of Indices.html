@@ -39,44 +39,7 @@
         <!-- Welcome Screen -->
         <div id="welcomeScreen" class="fade-in">
             <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-                <div class="p-8">
-                    <div class="flex items-center justify-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
-                    </div>
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Welcome to Math MC Practice</h2>
-                    <p class="text-gray-600 text-center mb-8">Prepare for your Math MC test with our comprehensive question bank and realistic mock exams.</p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-indigo-50 p-6 rounded-lg text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-indigo-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                            </svg>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Practice Mode</h3>
-                            <p class="text-gray-600">Study at your own pace with immediate feedback and explanations.</p>
-                        </div>
-                        <div class="bg-indigo-50 p-6 rounded-lg text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-indigo-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                            </svg>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Mock Test</h3>
-                            <p class="text-gray-600">Simulate the real test with 24 random questions in 45 minutes.</p>
-                        </div>
-                        <div class="bg-indigo-50 p-6 rounded-lg text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-indigo-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                            </svg>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">View Your Score</h3>
-                            <p class="text-gray-600">Check your results instantly after completing each test.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                        <button id="startPracticeBtn" class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition">Start Practice</button>
-                        <button style="display: none;" id="startTestBtn" class="px-6 py-3 bg-indigo-100 text-indigo-600 rounded-lg font-medium hover:bg-indigo-200 transition">Take Mock Test</button>
-                    </div>
-                </div>
+
             </div>
         </div>
 
@@ -224,6 +187,9 @@
     let questions = [];
 
     document.addEventListener('DOMContentLoaded', function () {
+	    document.title = decodeURIComponent(location.pathname.split('/').pop().replace('.html', ''));
+
+
         (async function () {
             try {
 			
@@ -316,7 +282,7 @@
         }
 
         function showPracticeMode() {
-            showScreen(welcomeScreen);
+            showScreen(practiceMode);
         }
 
         function showTestMode() {
