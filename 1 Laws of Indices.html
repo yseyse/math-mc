@@ -259,8 +259,12 @@
         practiceBtn.addEventListener('click', showPracticeMode);
         testBtn.addEventListener('click', showTestMode);
         bookmarksBtn.addEventListener('click', showBookmarks);
-        startPracticeBtn.addEventListener('click', startPractice);
-        startTestBtn.addEventListener('click', startTest);
+		if (startPracticeBtn) {
+			startPracticeBtn.addEventListener('click', startPractice);
+		}
+		if (startTestBtn) {
+			startTestBtn.addEventListener('click', startTest);
+		}     
         prevQuestionBtn.addEventListener('click', showPreviousQuestion);
         nextQuestionBtn.addEventListener('click', showNextQuestion);
         bookmarkBtn.addEventListener('click', toggleBookmark);
